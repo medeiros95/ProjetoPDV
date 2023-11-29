@@ -1,5 +1,5 @@
 const express = require("express");
-const { listarCategorias } = require("./controladores/listarcategorias");
+const { listarCategorias } = require("./controladores/listarCategorias");
 const { autenticaUsuario } = require("./intermediarios/autenticador");
 const { login } = require("./controladores/login");
 const { cadastrarUsuario } = require("./controladores/cadastrarUsuario");
