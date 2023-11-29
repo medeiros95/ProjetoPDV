@@ -4,7 +4,7 @@
   "description": "Desafio Final: Sistema PDV - Vendas",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "./src/index.js"
   },
   "keywords": [],
   "author": "Equipe: Gabriel Tavares Gonçalves, Deivison Daniel dos Santos Andrade, Macielli Maciel, Rodrigo Daniel, Victor Allisson Silva Medeiros",
