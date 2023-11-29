@@ -8,10 +8,6 @@ const login = async (req,res)=>{
     try {
     const usuario = await knex('usuarios').where('email', email);
 
-    if(email === null || senha === null){
-        return res.status(400).json({mensagem:'Digite email e senha para login.'})
-    }
-
     if(usuario.length<1){
         return res.status(400).json({mensagem:'Usuario ou senha incorretos.'})
     }
@@ -27,7 +23,7 @@ const login = async (req,res)=>{
     return res.status(200).json({token})
 
     } catch (error) {
-        return res.status(500).json({mensagem: 'Erro interno do servidor'})
+        return res.status(400).json({mensagem:'Erro interno do servidor'})
     }
     
 }

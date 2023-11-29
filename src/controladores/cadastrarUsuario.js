@@ -4,10 +4,6 @@ const { criptografarSenha } = require('../intermediarios/bcrypt')
 const cadastrarUsuario = async (req, res) => {
     const { nome, email, senha } = req.body
 
-    if(!nome || !email || !senha){
-        return res.status(400).json({ mensagem: 'Digite todos os campos!' })
-    }
-
     try {
         const emailCadastrado = await knex('usuarios').where({ email }).first()
 
