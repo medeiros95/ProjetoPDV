@@ -4,6 +4,8 @@ const express = require('express');
 const rotas = require('./rotas.js');
 
 const app = express();
+app.use(bodyParser.json())
+
 app.use(cors())
 app.use(express.json());
 app.use(rotas);
