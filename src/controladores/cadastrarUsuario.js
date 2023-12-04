@@ -3,7 +3,7 @@ const { criptografarSenha } = require('../intermediarios/bcrypt')
 
 const cadastrarUsuario = async (req, res) => {
     const { nome, email, senha } = req.body
-
+    
     try {
         const emailCadastrado = await knex('usuarios').where({ email }).first()
 
@@ -19,9 +19,8 @@ const cadastrarUsuario = async (req, res) => {
 
         await knex('usuarios').insert(usuario)
 
-        return res.status(201).send()
-    } 
-    catch (error) {
+        return res.status(201).json(usuario)
+    } catch (error) {
         return res.status(500).json({ mensagem: 'Erro interno do servidor' })
     }
 }

@@ -2,22 +2,15 @@ const knex = require("../conexao");
 const { criptografarSenha } = require("../intermediarios/bcrypt");
 
 const detalharPerfil = async (req, res) => {
-  return res.status(200).json(req.usuario);
+  return res.status(200).json(req.usuario[0]);
 };
 
 const editarUsuario = async (req, res) => {
   const { nome, email, senha } = req.body;
   const { id } = req.usuario[0];
 
-  if (!nome && !email && !senha) {
-    return res.status(400).json({
-      mensagem:
-        "Pelo menos um campo precisa ser fornecido para editar o perfil do usuario",
-    });
-  }
-
   try {
-    if (email !== req.usuario.email) {
+    if (email !== req.usuario[0].email) {
       const emailUsuarioExiste = await knex("usuarios")
         .where({ email })
         .first();

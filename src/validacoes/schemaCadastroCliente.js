@@ -1,6 +1,6 @@
 const joi = require('joi')
 
-const schemaCadastroUsuario = joi.object({
+const schemaCadastroCliente = joi.object({
     nome: joi.string().required().messages({
         'any.required': 'É necessário inserir o nome para cadastro.',
         'string.empty': 'É necessário inserir o nome para cadastro.'
@@ -10,10 +10,16 @@ const schemaCadastroUsuario = joi.object({
         'string.empty': 'É necessário inserir o email para cadastro.',
         'string.email': 'É necessário inserir um email válido para cadastro.'
     }),
-    senha: joi.string().required().messages({
-        'any.required': 'É necessário inserir a senha para cadastro.',
-        'string.empty': 'É necessário inserir a senha para cadastro.'
-    })
+    cpf: joi.number().required().messages({
+        'any.required': 'É necessário inserir o cpf para cadastro.',
+        'string.empty': 'É necessário inserir o cpf para cadastro.'
+    }),
+    cep: joi.number(),
+    rua: joi.string(),
+    numero: joi.number(),
+    bairro: joi.string(),
+    cidade: joi.string(),
+    estado: joi.string()
 })
 
-module.exports = schemaCadastroUsuario
+module.exports = schemaCadastroCliente
