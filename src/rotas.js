@@ -19,6 +19,7 @@ const { detalharProduto, excluirProduto } = require("./controladores/detalharExc
 const detalharCliente = require('./controladores/detalharCliente');
 const { listarClientes } = require("./controladores/listarClientes");
 const { editarCliente } = require("./controladores/editarCliente");
+const schemaEditarCliente = require("./validacoes/schemaEditarCliente")
 
 const rotas = express();
 
@@ -39,6 +40,6 @@ rotas.delete('/produto/:id', excluirProduto)
 rotas.post("/cliente", validarRequisicao(schemaCadastroCliente), cadastrarCliente)
 rotas.get('/cliente/:id', detalharCliente)
 rotas.get('/cliente', listarClientes)
-rotas.put("/cliente/:id", editarCliente)
+rotas.put("/cliente/:id",validarRequisicao(schemaEditarCliente), editarCliente)
 
 module.exports = rotas;
