@@ -10,11 +10,11 @@ const schemaCadastroCliente = joi.object({
         'string.empty': 'É necessário inserir o email para cadastro.',
         'string.email': 'É necessário inserir um email válido para cadastro.'
     }),
-    cpf: joi.number().required().messages({
+    cpf: joi.string().required().messages({
         'any.required': 'É necessário inserir o cpf para cadastro.',
         'string.empty': 'É necessário inserir o cpf para cadastro.'
     }),
-    cep: joi.number(),
+    cep: joi.string(),
     rua: joi.string(),
     numero: joi.number(),
     bairro: joi.string(),

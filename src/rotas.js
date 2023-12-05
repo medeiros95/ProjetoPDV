@@ -16,27 +16,29 @@ const { cadastrarProduto } = require("./controladores/cadastrarProduto");
 const { listarProdutos } = require("./controladores/listarProdutos")
 const { editarProduto } = require("./controladores/editarProduto");
 const { detalharProduto, excluirProduto } = require("./controladores/detalharExcluirProduto");
-const detalharCliente = require('./controladores/detalharCliente')
-
+const detalharCliente = require('./controladores/detalharCliente');
+const { listarClientes } = require("./controladores/listarClientes");
+const { editarCliente } = require("./controladores/editarCliente");
 
 const rotas = express();
 
-rotas.get("/categoria", listarCategorias);
-rotas.post("/usuario", validarRequisicao(schemaCadastroUsuario), cadastrarUsuario);
-rotas.post("/login", validarRequisicao(schemaLogin), login);
+rotas.get("/categoria", listarCategorias)
+rotas.post("/usuario", validarRequisicao(schemaCadastroUsuario), cadastrarUsuario)
+rotas.post("/login", validarRequisicao(schemaLogin), login)
 
-rotas.use(autenticaUsuario);
-rotas.get("/usuario", detalharPerfil);
-rotas.put("/usuario", validarRequisicao(schemaEditarUsuario), editarUsuario);
-rotas.post('/produto', validarRequisicao(schemaCadastroProduto), cadastrarProduto);
-rotas.get('/produto', listarProdutos);
-rotas.put('/produto/:id', validarRequisicao(schemaEditarProduto), editarProduto);
+rotas.use(autenticaUsuario)
+rotas.get("/usuario", detalharPerfil)
+rotas.put("/usuario", validarRequisicao(schemaEditarUsuario), editarUsuario)
+
+rotas.post('/produto', validarRequisicao(schemaCadastroProduto), cadastrarProduto)
+rotas.get('/produto', listarProdutos)
+rotas.put('/produto/:id', validarRequisicao(schemaEditarProduto), editarProduto)
 rotas.get('/produto/:id', detalharProduto)
 rotas.delete('/produto/:id', excluirProduto)
-rotas.get('/produto/:id', detalharCliente)
-
-
 
 rotas.post("/cliente", validarRequisicao(schemaCadastroCliente), cadastrarCliente)
+rotas.get('/cliente/:id', detalharCliente)
+rotas.get('/cliente', listarClientes)
+rotas.put("/cliente/:id", editarCliente)
 
 module.exports = rotas;
