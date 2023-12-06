@@ -15,8 +15,8 @@ const cadastrarCliente = async (req, res) => {
 
         const cliente = { nome, email, cpf, cep, rua, numero, bairro, cidade, estado }
 
-        await knex('clientes').insert(cliente)
-        return res.status(201).json(cliente)     
+        const clienteCadastrado = await knex('clientes').insert(cliente).returning('*')
+        return res.status(201).json(clienteCadastrado[0])     
     } 
     catch (error) {
         res.status(500).json({ mensagem: error });

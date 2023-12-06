@@ -9,17 +9,15 @@ const editarProduto = async (req, res) => {
         const existeCategoria = await knex('categorias').where('id',categoria_id);
 
         if(produtoLocalizado.length < 1){
-            return res.status(400).json({mensagem:'Produto nao localizado, verifique o id'}); 
+            return res.status(400).json({mensagem:'Produto não localizado, verifique o id'}); 
         }
         if(existeCategoria.length < 1){
-            return res.status(400).json({mensagem:'A categoria informada nao existe'}); 
+            return res.status(400).json({mensagem:'A categoria informada não existe'}); 
         }
 
-        const produtoAtualizado = await knex('produtos')
-        .update({descricao,quantidade_estoque,valor,categoria_id})
-        .where('id', id).returning('*')
+        await knex('produtos').where({ id }).update({ descricao, quantidade_estoque, valor, categoria_id})
         
-        return res.status(200).json(produtoAtualizado[0]);
+        return res.status(204).send();
         
     } catch (error) {
         return res.status(500).json({mensagem: 'Erro interno do servidor'})

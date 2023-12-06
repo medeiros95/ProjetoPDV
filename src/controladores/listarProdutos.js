@@ -5,7 +5,7 @@ const listarProdutos = async (req, res) => {
 
     try {
         if(categoria_id){
-            const produtoFiltrado = await knex('produtos').where('id',categoria_id);
+            const produtoFiltrado = await knex('produtos').where('categoria_id',categoria_id);
 
             if(produtoFiltrado.length < 1){
             return res.status(400).json({mensagem:'Esse id não pertence a nenhum produto'}); 
@@ -15,6 +15,7 @@ const listarProdutos = async (req, res) => {
         }
 
         const produtos = await knex('produtos')
+
         return res.status(200).json(produtos)
         
     } catch (error) {

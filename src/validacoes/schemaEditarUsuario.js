@@ -10,7 +10,10 @@ const schemaEditarUsuario = joi.object({
         'string.empty': 'É necessário inserir o email.',
         'string.email': 'É necessário inserir um email válido.'
     }),
-    senha: joi.string()
+    senha: joi.string().required().messages({
+        'string.empty': 'É necessário inserir a senha.',
+        'any.required': 'É necessário inserir a senha.'
+    })
 })
 
 module.exports = schemaEditarUsuario

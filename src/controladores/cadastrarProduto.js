@@ -12,14 +12,14 @@ const cadastrarProduto = async (req, res) => {
             return res.status(400).json('A categoria informada não existe.');
         }
 
-        await knex('produtos').insert({
+        const produtoCadastrado = await knex('produtos').insert({
             descricao, 
             quantidade_estoque, 
             valor, 
             categoria_id
-        })
+        }).returning('*')
 
-        return res.status(200).json('O produto foi cadastrado com sucesso.');
+        return res.status(200).json(produtoCadastrado);
     } catch (error) {
         return res.status(400).json(error.message);
     }
