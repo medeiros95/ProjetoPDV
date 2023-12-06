@@ -19,7 +19,7 @@ const cadastrarProduto = async (req, res) => {
             categoria_id
         }).returning('*')
 
-        return res.status(200).json(produtoCadastrado);
+        return res.status(200).json(produtoCadastrado[0]);
     } catch (error) {
         return res.status(400).json(error.message);
     }

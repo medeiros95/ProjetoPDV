@@ -26,7 +26,7 @@ const excluirProduto = async (req, res) => {
 
         await knex('produtos').where({ id }).del({});
 
-        return res.status(200);
+        return res.status(200).send();
 
     } catch (error) {
         return res.status(500).json({ mensagem: 'Erro interno do servidor' })
