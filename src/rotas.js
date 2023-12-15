@@ -19,9 +19,11 @@ const { detalharProduto, excluirProduto } = require("./controladores/detalharExc
 const detalharCliente = require('./controladores/detalharCliente');
 const { listarClientes } = require("./controladores/listarClientes");
 const { editarCliente } = require("./controladores/editarCliente");
-const schemaEditarCliente = require("./validacoes/schemaEditarCliente")
 const { cadastrarPedido } = require("./controladores/cadastrarPedido");
-const schemaCadastroPedido = require("./validacoes/schemaCadastroPedido")
+const schemaCadastroPedido = require("./validacoes/schemaCadastroPedido");
+const upload = require("./intermediarios/multer");
+const listarPedidos = require("./controladores/listarPedidos");
+
 
 const rotas = express();
 
@@ -33,18 +35,19 @@ rotas.use(autenticaUsuario)
 rotas.get("/usuario", detalharPerfil)
 rotas.put("/usuario", validarRequisicao(schemaEditarUsuario), editarUsuario)
 
-rotas.post('/produto', validarRequisicao(schemaCadastroProduto), cadastrarProduto)
+rotas.post('/produto', upload.single('produto_imagem'), validarRequisicao(schemaCadastroProduto), cadastrarProduto)
 rotas.get('/produto', listarProdutos)
-rotas.put('/produto/:id', validarRequisicao(schemaEditarProduto), editarProduto)
+rotas.put('/produto/:id', upload.single('produto_imagem'), validarRequisicao(schemaEditarProduto), editarProduto)
 rotas.get('/produto/:id', detalharProduto)
 rotas.delete('/produto/:id', excluirProduto)
 
 rotas.post("/cliente", validarRequisicao(schemaCadastroCliente), cadastrarCliente)
 rotas.get('/cliente/:id', detalharCliente)
 rotas.get('/cliente', listarClientes)
-rotas.put("/cliente/:id",validarRequisicao(schemaEditarCliente), editarCliente)
+rotas.put("/cliente/:id", editarCliente)
 
-rotas.post("/pedido",validarRequisicao(schemaCadastroPedido),cadastrarPedido)
+rotas.post("/pedido", validarRequisicao(schemaCadastroPedido), cadastrarPedido)
+rotas.get('/pedido', listarPedidos)
 
 
 module.exports = rotas;

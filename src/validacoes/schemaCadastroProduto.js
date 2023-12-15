@@ -21,6 +21,9 @@ const schemaCadastroProduto = joi.object({
         'number.base': 'É necessário inserir o ID da categoria do produto para cadastro.',
         'number.integer': 'É necessário inserir o ID da categoria do produto para cadastro.',
         'any.required': 'É necessário inserir o ID da categoria do produto para cadastro.'
+    }),
+    produto_imagem: joi.string().allow('', null).uri().messages({
+        'string.uri': 'O campo produto_imagem deve ser uma URL válida.',
     })
 
 })

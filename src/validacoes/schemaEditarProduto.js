@@ -20,6 +20,9 @@ const schemaEditarProduto = joi.object({
     categoria_id: joi.number().required().messages({
         'any.required': 'É necessário inserir a categoria do produto.',
         'string.empty': 'É necessário inserir a categoria do produto.'
+    }),
+    produto_imagem: joi.string().allow('', null).uri().messages({
+        'string.uri': 'O campo produto_imagem deve ser uma URL válida.',
     })
 })
 
