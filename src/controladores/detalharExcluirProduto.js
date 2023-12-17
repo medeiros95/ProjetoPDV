@@ -28,7 +28,10 @@ const excluirProduto = async (req, res) => {
 
     const { produto_imagem } = produtoEncontrado;
 
-    await knex("produtos").where({ id }).del({});
+    const produtoPedido = await knex('pedido_produtos').where({ produto_id: id})
+    if(produtoPedido.length > 0){
+        return res.status(404).json({ mensagem: 'Este produto não pode ser excluído, um pedido ainda o contém!'})
+    }
 
     if (produto_imagem !== null) {
       const nomeArquivo = produto_imagem.split('/').pop(); 
@@ -36,6 +39,8 @@ const excluirProduto = async (req, res) => {
       await excluirImagem(`imagemProdutos/${nomeArquivo}`);
       }
     }
+
+    await knex("produtos").where({ id }).del({});
 
     return res.status(200).send();
   } catch (error) {
